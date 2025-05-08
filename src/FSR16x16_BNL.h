@@ -29,18 +29,7 @@ class FSR16x16_BNL {
                     colType colT, 
                     int* colPins);
         FSR16x16_BNL(rowType rowT, 
-                    int rowClearPin, clockType rowClearType, 
-                    int rowClockPin, clockType rowClockType, 
-                    colType colT, 
-                    int* colPins);
-        FSR16x16_BNL(rowType rowT, 
                     int* rowPins, 
-                    colType colT, 
-                    int* colPins, 
-                    int outputPin);
-        FSR16x16_BNL(rowType rowT, 
-                    int rowClearPin, clockType rowClearType, 
-                    int rowClockPin, clockType rowClockType, 
                     colType colT, 
                     int* colPins, 
                     int outputPin);
@@ -49,6 +38,17 @@ class FSR16x16_BNL {
                     colType colT, 
                     int colClearPin, clockType colClearType, 
                     int colClockPin, clockType colClockType, 
+                    int outputPin);
+        FSR16x16_BNL(rowType rowT, 
+                    int rowClearPin, clockType rowClearType, 
+                    int rowClockPin, clockType rowClockType, 
+                    colType colT, 
+                    int* colPins);
+        FSR16x16_BNL(rowType rowT, 
+                    int rowClearPin, clockType rowClearType, 
+                    int rowClockPin, clockType rowClockType, 
+                    colType colT, 
+                    int* colPins, 
                     int outputPin);
         FSR16x16_BNL(rowType rowT, 
                     int rowClearPin, clockType rowClearType, 
@@ -59,7 +59,7 @@ class FSR16x16_BNL {
                     int outputPin);
         FSR16x16_BNL(rowType rowT, 
                     int clearPin, clockType clearType, 
-                    int clockPin, clockType clockType);
+                    int clockPin, clockType clkType);
     
         void begin();
         void read();
@@ -71,8 +71,8 @@ class FSR16x16_BNL {
         const rowType _rowType;
         const colType _colType;
 
-        const int* _rowPins = nullptr;
-        const int* _colPins = nullptr;
+        const int* _rowPins;
+        const int* _colPins;
 
         const int _rowClearPin;
         clockType _rowClearType = RISING;
@@ -90,6 +90,8 @@ class FSR16x16_BNL {
         const int _outputPin = -1;
 
         int data[SIZE][SIZE];
+
+        void constructorError();
 };
 
 #endif
