@@ -96,19 +96,19 @@ class FSR16x16_BNL {
 
         void beginRowDirect();
         void beginRowDemux();
-        void beginRowTimer4();
-        void beginColDirect();
-        void beginColMux();
-        void beginColTimer4();
-        void beginTimer8();
+        void beginRowTIMER4();
+        void beginColDIRECT();
+        void beginColMUX();
+        void beginColTIMER4();
+        void beginTIMER8();
 
-        void readDirect2Direct();
-        void readDirect2MUX();
-        void readDirect2TIMER4();
-        void readDEMUX2Direct();
+        void readDIRECT2DIRECT();
+        void readDIRECT2MUX();
+        void readDIRECT2TIMER4();
+        void readDEMUX2DIRECT();
         void readDEMUX2MUX();
         void readDEMUX2TIMER4();
-        void readTIMER42Direct();
+        void readTIMER42DIRECT();
         void readTIMER42MUX();
         void readTIMER42TIMER4();
         void readTIMER8();

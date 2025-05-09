@@ -1,8 +1,8 @@
 #include "FSR16x16_BNL.h"
 
-FSR16x16_BNL::FSR16x16_BNL(PinSelectType rowT, 
+FSR16x16_BNL::FSR16x16_BNL(pinSelectType rowT, 
                          int* rowPins, 
-                         PinSelectType colT, 
+                         pinSelectType colT, 
                          int* colPins):
     _rowType(rowT),
     _rowPins(rowPins),
@@ -25,9 +25,9 @@ FSR16x16_BNL::FSR16x16_BNL(PinSelectType rowT,
     if (!(_rowType == DIRECT || _rowType == DE_MUX) || !(_colType == DIRECT)) constructorError();
 }
 
-FSR16x16_BNL::FSR16x16_BNL(PinSelectType rowT, 
+FSR16x16_BNL::FSR16x16_BNL(pinSelectType rowT, 
                          int* rowPins, 
-                         PinSelectType colT, 
+                         pinSelectType colT, 
                          int* colPins, 
                          int outputPin):
     _rowType(rowT),
@@ -51,9 +51,9 @@ FSR16x16_BNL::FSR16x16_BNL(PinSelectType rowT,
     if (!(_rowType == DIRECT || _rowType == DE_MUX) || !(_colType == DE_MUX)) constructorError();
 }
 
-FSR16x16_BNL::FSR16x16_BNL(PinSelectType rowT, 
+FSR16x16_BNL::FSR16x16_BNL(pinSelectType rowT, 
                          int* rowPins, 
-                         PinSelectType colT, 
+                         pinSelectType colT, 
                          int colClearPin, int colClearType, 
                          int colClockPin, int colClockType, 
                          int outputPin):
@@ -78,10 +78,10 @@ FSR16x16_BNL::FSR16x16_BNL(PinSelectType rowT,
     if (!(_rowType == DIRECT || _rowType == DE_MUX) || !(_colType == TIMER4)) constructorError();
 }
 
-FSR16x16_BNL::FSR16x16_BNL(PinSelectType rowT, 
+FSR16x16_BNL::FSR16x16_BNL(pinSelectType rowT, 
                          int rowClearPin, int rowClearType, 
                          int rowClockPin, int rowClockType, 
-                         PinSelectType colT, 
+                         pinSelectType colT, 
                          int* colPins):
     _rowType(rowT),
     _rowClearPin(rowClearPin),
@@ -104,10 +104,10 @@ FSR16x16_BNL::FSR16x16_BNL(PinSelectType rowT,
     if (!(_rowType == TIMER4) || !(_colType == DIRECT)) constructorError();
 }
 
-FSR16x16_BNL::FSR16x16_BNL(PinSelectType rowT, 
+FSR16x16_BNL::FSR16x16_BNL(pinSelectType rowT, 
                          int rowClearPin, int rowClearType, 
                          int rowClockPin, int rowClockType, 
-                         PinSelectType colT, 
+                         pinSelectType colT, 
                          int* colPins, 
                          int outputPin):
     _rowType(rowT),
@@ -131,10 +131,10 @@ FSR16x16_BNL::FSR16x16_BNL(PinSelectType rowT,
     if (!(_rowType == TIMER4) || !(_colType == DE_MUX)) constructorError();
 }
 
-FSR16x16_BNL::FSR16x16_BNL(PinSelectType rowT, 
+FSR16x16_BNL::FSR16x16_BNL(pinSelectType rowT, 
                          int rowClearPin, int rowClearType, 
                          int rowClockPin, int rowClockType, 
-                         PinSelectType colT, 
+                         pinSelectType colT, 
                          int colClearPin, int colClearType, 
                          int colClockPin, int colClockType, 
                          int outputPin):
@@ -159,7 +159,7 @@ FSR16x16_BNL::FSR16x16_BNL(PinSelectType rowT,
     if (!(_rowType == TIMER4) || !(_colType == TIMER4)) constructorError();
 }
 
-FSR16x16_BNL::FSR16x16_BNL(PinSelectType rowT, 
+FSR16x16_BNL::FSR16x16_BNL(pinSelectType rowT, 
                          int clearPin, int clearType, 
                          int clockPin, int clkType):
     _rowType(rowT),
@@ -227,28 +227,28 @@ void FSR16x16_BNL::clockSignal(int pin, int clkType) {
     }
 }
 
-void FSR16x16_BNL::beginRowDirect() {
+void FSR16x16_BNL::beginRowDIRECT() {
     for (int i = 0; i < SIZE; i++) {
         pinMode(_rowPins[i], INPUT);
         digitalWrite(_rowPins[i], HIGH);
     }
 }
 
-void FSR16x16_BNL::beginRowDemux() {
+void FSR16x16_BNL::beginRowDEMUX() {
     for (int i = 0; i < SELECT_SIZE; i++) {
         pinMode(_rowPins[i], OUTPUT);
         digitalWrite(_rowPins[i], LOW);
     }
 }
 
-void FSR16x16_BNL::beginRowTimer4() {
+void FSR16x16_BNL::beginRowTIMER4() {
     pinMode(_rowClearPin, OUTPUT);
     digitalWrite(_rowClearPin, LOW);
     pinMode(_rowClockPin, OUTPUT);
     digitalWrite(_rowClockPin, LOW);
 }
 
-void FSR16x16_BNL::beginColDirect() {
+void FSR16x16_BNL::beginColDIRECT() {
     for (int i = 0; i < SIZE; i++) {
         pinMode(_colPins[i], INPUT);
     }
@@ -262,7 +262,7 @@ void FSR16x16_BNL::beginColMUX() {
     pinMode(_outputPin, INPUT);
 }
 
-void FSR16x16_BNL::beginColTimer4() {
+void FSR16x16_BNL::beginColTIMER4() {
     pinMode(_colClearPin, OUTPUT);
     digitalWrite(_colClearPin, LOW);
     pinMode(_colClockPin, OUTPUT);
@@ -271,7 +271,7 @@ void FSR16x16_BNL::beginColTimer4() {
     pinMode(_outputPin, INPUT);
 }
 
-void FSR16x16_BNL::beginTimer8() {
+void FSR16x16_BNL::beginTIMER8() {
     pinMode(_clearPin, OUTPUT);
     digitalWrite(_clearPin, LOW);
     pinMode(_clockPin, OUTPUT);
@@ -303,7 +303,7 @@ void FSR16x16_BNL::begin() {
     }
 }
 
-void FSR16x16_BNL::readDirect2Direct() {
+void FSR16x16_BNL::readDIRECT2DIRECT() {
     for (int i = 0; i < SIZE; i++) {
         digitalWrite(_rowPins[i], HIGH);
         for (int j = 0; j < SIZE; j++) {
@@ -313,7 +313,7 @@ void FSR16x16_BNL::readDirect2Direct() {
     }
 }
 
-void FSR16x16_BNL::readDirect2MUX() {
+void FSR16x16_BNL::readDIRECT2MUIX() {
     for (int i = 0; i < SIZE; i++) {
         digitalWrite(_rowPins[i], HIGH);
         for (int j = 0; j < SIZE; j++) {
@@ -326,7 +326,7 @@ void FSR16x16_BNL::readDirect2MUX() {
     }
 }
 
-void FSR16x16_BNL::readDirect2TIMER4() {
+void FSR16x16_BNL::readDIRECT2TIMER4() {
     for (int i = 0; i < SIZE; i++) {
         digitalWrite(_rowPins[i], HIGH);
         clockSignal(_colClearPin, _colClearType);
@@ -338,7 +338,7 @@ void FSR16x16_BNL::readDirect2TIMER4() {
     }
 }
 
-void FSR16x16_BNL::readDEMUX2Direct() {
+void FSR16x16_BNL::readDEMUX2DIRECT() {
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SELECT_SIZE; j++) {
             digitalWrite(_rowPins[j], (i >> j) & 0x01);
@@ -376,7 +376,7 @@ void FSR16x16_BNL::readDEMUX2TIMER4() {
     }
 }
 
-void FSR16X16_BNL::readTIMER42Direct() {
+void FSR16X16_BNL::readTIMER42DIRECT() {
     clockSignal(_rowClearPin, _rowClearType);
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
