@@ -31,6 +31,8 @@ To use the minimal 3-pin mode:
 
 > 📖 Refer to the accompanying design paper for detailed wiring diagrams.
 
+![Circuit diagram sample](./explain/sample_circuit_diagram.jpeg)
+
 ---
 
 ## 📦 Installation
