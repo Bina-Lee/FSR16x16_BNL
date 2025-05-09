@@ -428,15 +428,15 @@ void FSR16x16_BNL::read() {
     else {
         if (_rowType == DIRECT) {
             if (_colType == DIRECT) {
-                readDirect2Direct();
+                readDIRECT2DIRECT();
             } else if (_colType == DE_MUX) {
-                readDirect2MUX();
+                readDIRECT2MUIX();
             } else if (_colType == TIMER4) {
-                readDirect2TIMER4();
+                readDIRECT2TIMER4();
             }
         } else if (_rowType == DE_MUX) {
             if (_colType == DIRECT) {
-                readDEMUX2Direct();
+                readDEMUX2DIRECT();
             } else if (_colType == DE_MUX) {
                 readDEMUX2MUX();
             } else if (_colType == TIMER4) {
@@ -444,7 +444,7 @@ void FSR16x16_BNL::read() {
             }
         } else if (_rowType == TIMER4) {
             if (_colType == DIRECT) {
-                readTIMER42Direct();
+                readTIMER42DIRECT();
             } else if (_colType == DE_MUX) {
                 readTIMER42MUX();
             } else if (_colType == TIMER4) {
