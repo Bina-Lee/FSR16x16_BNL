@@ -306,7 +306,40 @@ void FSR16x16_BNL::begin() {
     }
 }
 
+void FSR16x16_BNL::readDirect2Direct() {
+    for (int i = 0; i < SIZE; i++) {
+        digitalWrite(_rowPins[i], HIGH);
+        for (int j = 0; j < SIZE; j++) {
+            data[i][j] = digitalRite(_colPins[j]);;
+        }
+        digitalWrite(_rowPins[i], LOW);
+    }
+}
 
+void FSR16x16_BNL::readDirect2MUX() {
+    for (int i = 0; i < SIZE; i++) {
+        digitalWrite(_rowPins[i], HIGH);
+        for (int j = 0; j < SIZE; j++) {
+            for (int k = 0; k < SELECT_SIZE; k++) {
+                digitalWrite(_colPins[k], (j >> k) & 0x01);
+            }
+            data[i][j] = digitalRead(_outputPin);
+        }
+        digitalWrite(_rowPins[i], LOW);
+    }
+}
+
+void FSR16x16_BNL::readDirect2TIMER4() {
+    for (int i = 0; i < SIZE; i++) {
+        digitalWrite(_rowPins[i], HIGH);
+        clockSignal(_rowClearPin, _rowClearType);
+        for (int j = 0; j < SIZE; j++) {
+            clockSignal(_colClockPin, _colClockType);
+            data[i][j] = digitalRead(_outputPin);
+        }
+        digitalWrite(_rowPins[i], LOW);
+    }
+}
 
 
 
