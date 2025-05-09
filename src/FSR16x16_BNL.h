@@ -68,6 +68,7 @@ class FSR16x16_BNL {
 
     private:
         static const int SIZE = 16;
+        static const int SELECT_SIZE = 4;
         const rowType _rowType;
         const colType _colType;
 
@@ -75,23 +76,27 @@ class FSR16x16_BNL {
         const int* _colPins;
 
         const int _rowClearPin;
-        clockType _rowClearType = RISING;
+        const clockType _rowClearType;
         const int _rowClockPin;
-        clockType _rowClockType = RISING;
+        const clockType _rowClockType;
         const int _colClearPin;
-        clockType _colClearType = RISING;
+        const clockType _colClearType;
         const int _colClockPin;
-        clockType _colClockType = RISING;
+        const clockType _colClockType;
         const int _clearPin;
-        clockType _clearType = RISING;
+        const clockType _clearType;
         const int _clockPin;
-        clockType _clockType = RISING;
+        const clockType _clockType;
 
         const int _outputPin = -1;
 
         int data[SIZE][SIZE];
 
         void constructorError();
+
+        void clockSignal(int pin, clockType clkType);
+        void clockSignalMicro(int pin, clockType clkType, int delayT);
+        void clockSignalMilli(int pin, clockType clkType, int delayT);
 };
 
 #endif
