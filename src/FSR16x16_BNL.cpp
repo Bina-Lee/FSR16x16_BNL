@@ -313,7 +313,7 @@ void FSR16x16_BNL::readDIRECT2DIRECT() {
     }
 }
 
-void FSR16x16_BNL::readDIRECT2MUIX() {
+void FSR16x16_BNL::readDIRECT2MUX() {
     for (int i = 0; i < SIZE; i++) {
         digitalWrite(_rowPins[i], HIGH);
         for (int j = 0; j < SIZE; j++) {
