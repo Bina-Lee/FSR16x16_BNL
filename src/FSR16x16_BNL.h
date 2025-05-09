@@ -94,8 +94,8 @@ class FSR16x16_BNL {
 
         void clockSignal(int pin, int clkType);
 
-        void beginRowDirect();
-        void beginRowDemux();
+        void beginRowDIRECT();
+        void beginRowDEMUX();
         void beginRowTIMER4();
         void beginColDIRECT();
         void beginColMUX();

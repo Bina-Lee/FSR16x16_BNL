@@ -282,23 +282,23 @@ void FSR16x16_BNL::beginTIMER8() {
 
 void FSR16x16_BNL::begin() {
     if (_rowType == TIMER8) {
-        beginTimer8();
+        beginTIMER8();
     }
     else {
         if (_rowType == DIRECT) {
-            beginRowDirect();
+            beginRowDIRECT();
         } else if (_rowType == DE_MUX) {
-            beginRowDemux();
+            beginRowDEMUX();
         } else if (_rowType == TIMER4) {
-            beginRowTimer4();
+            beginRowTIMER4();
         }
 
         if (_colType == DIRECT) {
-            beginColDirect();
+            beginColDIRECT();
         } else if (_colType == DE_MUX) {
             beginColMUX();
         } else if (_colType == TIMER4) {
-            beginColTimer4();
+            beginColTIMER4();
         }
     }
 }
@@ -307,7 +307,7 @@ void FSR16x16_BNL::readDIRECT2DIRECT() {
     for (int i = 0; i < SIZE; i++) {
         digitalWrite(_rowPins[i], HIGH);
         for (int j = 0; j < SIZE; j++) {
-            data[i][j] = analogRite(_colPins[j]);;
+            data[i][j] = analogRead(_colPins[j]);;
         }
         digitalWrite(_rowPins[i], LOW);
     }
@@ -376,7 +376,7 @@ void FSR16x16_BNL::readDEMUX2TIMER4() {
     }
 }
 
-void FSR16X16_BNL::readTIMER42DIRECT() {
+void FSR16x16_BNL::readTIMER42DIRECT() {
     clockSignal(_rowClearPin, _rowClearType);
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
