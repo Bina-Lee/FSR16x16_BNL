@@ -22,6 +22,12 @@ enum clockType {
     FALLING
 };
 
+enum delayType {
+    NONE,
+    MICRO,
+    MILLI
+};
+
 class FSR16x16_BNL {
     public:
         FSR16x16_BNL(rowType rowT, 
@@ -66,6 +72,8 @@ class FSR16x16_BNL {
         int get(int row, int col);
         void print();
 
+        void clockDelay(delayType delayT, int delayTime);
+
     private:
         static const int SIZE = 16;
         static const int SELECT_SIZE = 4;
@@ -91,6 +99,9 @@ class FSR16x16_BNL {
         const int _outputPin = -1;
 
         int data[SIZE][SIZE];
+
+        delayType _delayType = MILLI;
+        int _delayTime = 20;
 
         void constructorError();
 

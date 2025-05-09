@@ -190,42 +190,38 @@ void FSR16x16_BNL::constructorError() {
 
 void FSR16x16_BNL::clockSignal(int pin, clockType clkType) {
     if (clkType == RISING) {
-        delayMicroseconds(1);
+        if (_delayType == NONE){
+            delayMicroseconds(1);
+        } else if (_delayType == MICRO) {
+            delayMicroseconds(_delayTime);
+        } else if (_delayType == MILLI) {
+            delay(_delayTime);
+        }
         digitalWrite(pin, HIGH);
-        delayMicroseconds(1);
+        if (_delayType == NONE){
+            delayMicroseconds(1);
+        } else if (_delayType == MICRO) {
+            delayMicroseconds(_delayTime);
+        } else if (_delayType == MILLI) {
+            delay(_delayTime);
+        }
         digitalWrite(pin, LOW);
     } else {
-        delayMicroseconds(1);
+        if (_delayType == NONE){
+            delayMicroseconds(1);
+        } else if (_delayType == MICRO) {
+            delayMicroseconds(_delayTime);
+        } else if (_delayType == MILLI) {
+            delay(_delayTime);
+        }
         digitalWrite(pin, LOW);
-        delayMicroseconds(1);
-        digitalWrite(pin, HIGH);
-    }
-}
-
-void FSR16x16_BNL::clockSignalMicro(int pin, clockType clkType, int delayT) {
-    if (clkType == RISING) {
-        delayMicroseconds(delayT);
-        digitalWrite(pin, HIGH);
-        delayMicroseconds(delayT);
-        digitalWrite(pin, LOW);
-    } else {
-        delayMicroseconds(delayT);
-        digitalWrite(pin, LOW);
-        delayMicroseconds(delayT);
-        digitalWrite(pin, HIGH);
-    }
-}
-
-void FSR16x16_BNL::clockSignalMilli(int pin, clockType clkType, int delayT) {
-    if (clkType == RISING) {
-        delay(delayT);
-        digitalWrite(pin, HIGH);
-        delay(delayT);
-        digitalWrite(pin, LOW);
-    } else {
-        delay(delayT);
-        digitalWrite(pin, LOW);
-        delay(delayT);
+        if (_delayType == NONE){
+            delayMicroseconds(1);
+        } else if (_delayType == MICRO) {
+            delayMicroseconds(_delayTime);
+        } else if (_delayType == MILLI) {
+            delay(_delayTime);
+        }
         digitalWrite(pin, HIGH);
     }
 }
@@ -469,4 +465,9 @@ void FSR16x16_BNL::print() {
         }
         Serial.println();
     }
+}
+
+void clockDelay(delayType delayT, int delayTime) {
+    _delayType = delayT;
+    _delayTime = delayTime;
 }
