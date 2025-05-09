@@ -229,3 +229,103 @@ void FSR16x16_BNL::clockSignalMilli(int pin, clockType clkType, int delayT) {
         digitalWrite(pin, HIGH);
     }
 }
+
+void FSR16x16_BNL::beginRowDirect() {
+    for (int i = 0; i < SIZE; i++) {
+        pinMode(_rowPins[i], INPUT);
+        digitalWrite(_rowPins[i], HIGH);
+    }
+}
+
+void FSR16x16_BNL::beginRowDemux() {
+    for (int i = 0; i < SELECT_SIZE; i++) {
+        pinMode(_rowPins[i], OUTPUT);
+        digitalWrite(_rowPins[i], LOW);
+    }
+}
+
+void FSR16x16_BNL::beginRowTimer4() {
+    pinMode(_rowClearPin, OUTPUT);
+    digitalWrite(_rowClearPin, LOW);
+    pinMode(_rowClockPin, OUTPUT);
+    digitalWrite(_rowClockPin, LOW);
+}
+
+void FSR16x16_BNL::beginColDirect() {
+    for (int i = 0; i < SIZE; i++) {
+        pinMode(_colPins[i], INPUT);
+    }
+}
+
+void FSR16x16_BNL::beginColMUX() {
+    for (int i = 0; i < SELECT_SIZE; i++) {
+        pinMode(_colPins[i], OUTPUT);
+        digitalWrite(_colPins[i], LOW);
+    }
+    pinMode(_outputPin, INPUT);
+}
+
+void FSR16x16_BNL::beginColTimer4() {
+    pinMode(_colClearPin, OUTPUT);
+    digitalWrite(_colClearPin, LOW);
+    pinMode(_colClockPin, OUTPUT);
+    digitalWrite(_colClockPin, LOW);
+
+    pinMode(_outputPin, INPUT);
+}
+
+void FSR16x16_BNL::beginTimer8() {
+    pinMode(_clearPin, OUTPUT);
+    digitalWrite(_clearPin, LOW);
+    pinMode(_clockPin, OUTPUT);
+    digitalWrite(_clockPin, LOW);
+
+    pinMode(_outputPin, INPUT);
+}
+
+void FSR16x16_BNL::begin() {
+    if (_rowType == TIMER8) {
+        beginTimer8();
+    }
+    else {
+        if (_rowType == DIRECT) {
+            beginRowDirect();
+        } else if (_rowType == DEMUX) {
+            beginRowDemux();
+        } else if (_rowType == TIMER4) {
+            beginRowTimer4();
+        }
+
+        if (_colType == DIRECT) {
+            beginColDirect();
+        } else if (_colType == MUX) {
+            beginColMUX();
+        } else if (_colType == TIMER4) {
+            beginColTimer4();
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+int FSR16x16_BNL::get(int row, int col) {
+    return data[row][col];
+}
+
+void FSR16x16_BNL::print() {
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            Serial.print(data[i][j]);
+            Serial.print(",");
+        }
+        Serial.println();
+    }
+}
