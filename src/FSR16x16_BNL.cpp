@@ -424,6 +424,39 @@ void FSR16x16_BNL::readTIMER8() {
     }
 }
 
+void FSR16x16_BNL::read() {
+    if (_rowType == TIMER8) {
+        readTIMER8();
+    }
+    else {
+        if (_rowType == DIRECT) {
+            if (_colType == DIRECT) {
+                readDirect2Direct();
+            } else if (_colType == MUX) {
+                readDirect2MUX();
+            } else if (_colType == TIMER4) {
+                readDirect2TIMER4();
+            }
+        } else if (_rowType == DEMUX) {
+            if (_colType == DIRECT) {
+                readDEMUX2Direct();
+            } else if (_colType == MUX) {
+                readDEMUX2MUX();
+            } else if (_colType == TIMER4) {
+                readDEMUX2TIMER4();
+            }
+        } else if (_rowType == TIMER4) {
+            if (_colType == DIRECT) {
+                readTIMER42Direct();
+            } else if (_colType == MUX) {
+                readTIMER42MUX();
+            } else if (_colType == TIMER4) {
+                readTIMER42TIMER4();
+            }
+        }
+    }
+}
+
 int FSR16x16_BNL::get(int row, int col) {
     return data[row][col];
 }
