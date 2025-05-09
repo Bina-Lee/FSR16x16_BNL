@@ -1,8 +1,8 @@
 #include "FSR16x16_BNL.h"
 
-FSR16x16_BNL::FSR16x16_BNL(rowType rowT, 
+FSR16x16_BNL::FSR16x16_BNL(PinSelectType rowT, 
                          int* rowPins, 
-                         colType colT, 
+                         PinSelectType colT, 
                          int* colPins):
     _rowType(rowT),
     _rowPins(rowPins),
@@ -22,12 +22,12 @@ FSR16x16_BNL::FSR16x16_BNL(rowType rowT,
     _clockPin(-1),
     _clockType(RISING),
     _outputPin(-1) {
-    if (!(_rowType == DIRECT || _rowType == DEMUX) || !(_colType == DIRECT)) constructorError();
+    if (!(_rowType == DIRECT || _rowType == DE_MUX) || !(_colType == DIRECT)) constructorError();
 }
 
-FSR16x16_BNL::FSR16x16_BNL(rowType rowT, 
+FSR16x16_BNL::FSR16x16_BNL(PinSelectType rowT, 
                          int* rowPins, 
-                         colType colT, 
+                         PinSelectType colT, 
                          int* colPins, 
                          int outputPin):
     _rowType(rowT),
@@ -48,12 +48,12 @@ FSR16x16_BNL::FSR16x16_BNL(rowType rowT,
     _clearType(RISING),
     _clockPin(-1),
     _clockType(RISING) {
-    if (!(_rowType == DIRECT || _rowType == DEMUX) || !(_colType == MUX)) constructorError();
+    if (!(_rowType == DIRECT || _rowType == DE_MUX) || !(_colType == DE_MUX)) constructorError();
 }
 
-FSR16x16_BNL::FSR16x16_BNL(rowType rowT, 
+FSR16x16_BNL::FSR16x16_BNL(PinSelectType rowT, 
                          int* rowPins, 
-                         colType colT, 
+                         PinSelectType colT, 
                          int colClearPin, clockType colClearType, 
                          int colClockPin, clockType colClockType, 
                          int outputPin):
@@ -75,13 +75,13 @@ FSR16x16_BNL::FSR16x16_BNL(rowType rowT,
     _clockPin(-1),
     _clockType(RISING),
     _colPins(nullptr) {
-    if (!(_rowType == DIRECT || _rowType == DEMUX) || !(_colType == TIMER4)) constructorError();
+    if (!(_rowType == DIRECT || _rowType == DE_MUX) || !(_colType == TIMER4)) constructorError();
 }
 
-FSR16x16_BNL::FSR16x16_BNL(rowType rowT, 
+FSR16x16_BNL::FSR16x16_BNL(PinSelectType rowT, 
                          int rowClearPin, clockType rowClearType, 
                          int rowClockPin, clockType rowClockType, 
-                         colType colT, 
+                         PinSelectType colT, 
                          int* colPins):
     _rowType(rowT),
     _rowClearPin(rowClearPin),
@@ -104,10 +104,10 @@ FSR16x16_BNL::FSR16x16_BNL(rowType rowT,
     if (!(_rowType == TIMER4) || !(_colType == DIRECT)) constructorError();
 }
 
-FSR16x16_BNL::FSR16x16_BNL(rowType rowT, 
+FSR16x16_BNL::FSR16x16_BNL(PinSelectType rowT, 
                          int rowClearPin, clockType rowClearType, 
                          int rowClockPin, clockType rowClockType, 
-                         colType colT, 
+                         PinSelectType colT, 
                          int* colPins, 
                          int outputPin):
     _rowType(rowT),
@@ -128,13 +128,13 @@ FSR16x16_BNL::FSR16x16_BNL(rowType rowT,
     _clockPin(-1),
     _clockType(RISING),
     _rowPins(nullptr) {
-    if (!(_rowType == TIMER4) || !(_colType == MUX)) constructorError();
+    if (!(_rowType == TIMER4) || !(_colType == DE_MUX)) constructorError();
 }
 
-FSR16x16_BNL::FSR16x16_BNL(rowType rowT, 
+FSR16x16_BNL::FSR16x16_BNL(PinSelectType rowT, 
                          int rowClearPin, clockType rowClearType, 
                          int rowClockPin, clockType rowClockType, 
-                         colType colT, 
+                         PinSelectType colT, 
                          int colClearPin, clockType colClearType, 
                          int colClockPin, clockType colClockType, 
                          int outputPin):
@@ -158,7 +158,8 @@ FSR16x16_BNL::FSR16x16_BNL(rowType rowT,
     _colPins(nullptr) {
     if (!(_rowType == TIMER4) || !(_colType == TIMER4)) constructorError();
 }
-FSR16x16_BNL::FSR16x16_BNL(rowType rowT, 
+
+FSR16x16_BNL::FSR16x16_BNL(PinSelectType rowT, 
                          int clearPin, clockType clearType, 
                          int clockPin, clockType clkType):
     _rowType(rowT),
@@ -286,7 +287,7 @@ void FSR16x16_BNL::begin() {
     else {
         if (_rowType == DIRECT) {
             beginRowDirect();
-        } else if (_rowType == DEMUX) {
+        } else if (_rowType == DE_MUX) {
             beginRowDemux();
         } else if (_rowType == TIMER4) {
             beginRowTimer4();
@@ -294,7 +295,7 @@ void FSR16x16_BNL::begin() {
 
         if (_colType == DIRECT) {
             beginColDirect();
-        } else if (_colType == MUX) {
+        } else if (_colType == DE_MUX) {
             beginColMUX();
         } else if (_colType == TIMER4) {
             beginColTimer4();
@@ -428,15 +429,15 @@ void FSR16x16_BNL::read() {
         if (_rowType == DIRECT) {
             if (_colType == DIRECT) {
                 readDirect2Direct();
-            } else if (_colType == MUX) {
+            } else if (_colType == DE_MUX) {
                 readDirect2MUX();
             } else if (_colType == TIMER4) {
                 readDirect2TIMER4();
             }
-        } else if (_rowType == DEMUX) {
+        } else if (_rowType == DE_MUX) {
             if (_colType == DIRECT) {
                 readDEMUX2Direct();
-            } else if (_colType == MUX) {
+            } else if (_colType == DE_MUX) {
                 readDEMUX2MUX();
             } else if (_colType == TIMER4) {
                 readDEMUX2TIMER4();
@@ -444,7 +445,7 @@ void FSR16x16_BNL::read() {
         } else if (_rowType == TIMER4) {
             if (_colType == DIRECT) {
                 readTIMER42Direct();
-            } else if (_colType == MUX) {
+            } else if (_colType == DE_MUX) {
                 readTIMER42MUX();
             } else if (_colType == TIMER4) {
                 readTIMER42TIMER4();

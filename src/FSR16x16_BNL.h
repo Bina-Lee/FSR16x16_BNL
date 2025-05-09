@@ -2,17 +2,9 @@
 #define FSR16X16_BNL_H
 
 #include <Arduino.h>
-
-enum rowType {
+enum pinSelectType {
     DIRECT,
-    DEMUX,
-    TIMER4,
-    TIMER8
-};
-
-enum colType {
-    DIRECT,
-    MUX,
+    DE_MUX,
     TIMER4,
     TIMER8
 };
@@ -30,40 +22,40 @@ enum delayType {
 
 class FSR16x16_BNL {
     public:
-        FSR16x16_BNL(rowType rowT, 
+        FSR16x16_BNL(pinSelectType rowT, 
                     int* rowPins, 
-                    colType colT, 
+                    pinSelectType colT, 
                     int* colPins);
-        FSR16x16_BNL(rowType rowT, 
+        FSR16x16_BNL(pinSelectType rowT, 
                     int* rowPins, 
-                    colType colT, 
+                    pinSelectType colT, 
                     int* colPins, 
                     int outputPin);
-        FSR16x16_BNL(rowType rowT, 
+        FSR16x16_BNL(pinSelectType rowT, 
                     int* rowPins, 
-                    colType colT, 
+                    pinSelectType colT, 
                     int colClearPin, clockType colClearType, 
                     int colClockPin, clockType colClockType, 
                     int outputPin);
-        FSR16x16_BNL(rowType rowT, 
+        FSR16x16_BNL(pinSelectType rowT, 
                     int rowClearPin, clockType rowClearType, 
                     int rowClockPin, clockType rowClockType, 
-                    colType colT, 
+                    pinSelectType colT, 
                     int* colPins);
-        FSR16x16_BNL(rowType rowT, 
+        FSR16x16_BNL(pinSelectType rowT, 
                     int rowClearPin, clockType rowClearType, 
                     int rowClockPin, clockType rowClockType, 
-                    colType colT, 
+                    pinSelectType colT, 
                     int* colPins, 
                     int outputPin);
-        FSR16x16_BNL(rowType rowT, 
+        FSR16x16_BNL(pinSelectType rowT, 
                     int rowClearPin, clockType rowClearType, 
                     int rowClockPin, clockType rowClockType, 
-                    colType colT, 
+                    pinSelectType colT, 
                     int colClearPin, clockType colClearType, 
                     int colClockPin, clockType colClockType, 
                     int outputPin);
-        FSR16x16_BNL(rowType rowT, 
+        FSR16x16_BNL(pinSelectType rowT, 
                     int clearPin, clockType clearType, 
                     int clockPin, clockType clkType);
     
@@ -77,8 +69,8 @@ class FSR16x16_BNL {
     private:
         static const int SIZE = 16;
         static const int SELECT_SIZE = 4;
-        const rowType _rowType;
-        const colType _colType;
+        const pinSelectType _rowType;
+        const pinSelectType _colType;
 
         const int* _rowPins;
         const int* _colPins;
