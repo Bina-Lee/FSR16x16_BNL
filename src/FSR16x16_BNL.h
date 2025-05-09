@@ -106,8 +106,6 @@ class FSR16x16_BNL {
         void constructorError();
 
         void clockSignal(int pin, clockType clkType);
-        void clockSignalMicro(int pin, clockType clkType, int delayT);
-        void clockSignalMilli(int pin, clockType clkType, int delayT);
 
         void beginRowDirect();
         void beginRowDemux();

@@ -467,7 +467,7 @@ void FSR16x16_BNL::print() {
     }
 }
 
-void clockDelay(delayType delayT, int delayTime) {
+void FSR16x16_BNL::clockDelay(delayType delayT, int delayTime) {
     _delayType = delayT;
     _delayTime = delayTime;
 }
