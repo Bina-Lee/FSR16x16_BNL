@@ -310,7 +310,7 @@ void FSR16x16_BNL::readDirect2Direct() {
     for (int i = 0; i < SIZE; i++) {
         digitalWrite(_rowPins[i], HIGH);
         for (int j = 0; j < SIZE; j++) {
-            data[i][j] = digitalRite(_colPins[j]);;
+            data[i][j] = analogRite(_colPins[j]);;
         }
         digitalWrite(_rowPins[i], LOW);
     }
@@ -323,7 +323,7 @@ void FSR16x16_BNL::readDirect2MUX() {
             for (int k = 0; k < SELECT_SIZE; k++) {
                 digitalWrite(_colPins[k], (j >> k) & 0x01);
             }
-            data[i][j] = digitalRead(_outputPin);
+            data[i][j] = analogRead(_outputPin);
         }
         digitalWrite(_rowPins[i], LOW);
     }
@@ -334,50 +334,50 @@ void FSR16x16_BNL::readDirect2TIMER4() {
         digitalWrite(_rowPins[i], HIGH);
         clockSignal(_colClearPin, _colClearType);
         for (int j = 0; j < SIZE; j++) {
+            data[i][j] = analogRead(_outputPin);
             clockSignal(_colClockPin, _colClockType);
-            data[i][j] = digitalRead(_outputPin);
         }
         digitalWrite(_rowPins[i], LOW);
     }
 }
 
 void FSR16x16_BNL::readDEMUX2Direct() {
-    clockSignal(_rowClearPin, _rowClearType);
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SELECT_SIZE; j++) {
-            date[i][j] = analogRead(_colPins[j]);
+            digitalWrite(_rowPins[j], (i >> j) & 0x01);
         }
-        clockSignal(_rowClockPin, _rowClockType);
+        for (int j = 0; j < SIZE; j++) {
+            data[i][j] = analogRead(_colPins[j]);
+        }
     }
 }
 
 void FSR16x16_BNL::readDEMUX2MUX() {
-    clockSignal(_rowClearPin, _rowClearType);
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SELECT_SIZE; j++) {
+            digitalWrite(_rowPins[j], (i >> j) & 0x01);
+        }
+        for (int j = 0; j < SIZE; j++) {
             for (int k = 0; k < SELECT_SIZE; k++) {
                 digitalWrite(_colPins[k], (j >> k) & 0x01);
             }
-            data[i][j] = digitalRead(_outputPin);
+            data[i][j] = analogRead(_outputPin);
         }
-        clockSignal(_rowClockPin, _rowClockType);
     }
 }
 
 void FSR16x16_BNL::readDEMUX2TIMER4() {
-    clockSignal(_rowClearPin, _rowClearType);
     for (int i = 0; i < SIZE; i++) {
-        clockSignal(_colClearPin, _colClearType);
         for (int j = 0; j < SELECT_SIZE; j++) {
-            data[i][j] = digitalRead(_outputPin);
+            digitalWrite(_rowPins[j], (i >> j) & 0x01);
+        }
+        clockSignal(_colClearPin, _colClearType);
+        for (int j = 0; j < SIZE; j++) {
+            data[i][j] = analogRead(_outputPin);
             clockSignal(_colClockPin, _colClockType);
         }
-        clockSignal(_rowClockPin, _rowClockType);
     }
 }
-
-
-
 
 
 
