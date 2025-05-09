@@ -386,7 +386,7 @@ void FSR16x16_BNL::readTIMER42DIRECT() {
     }
 }
 
-void FSR16X16_BNL::readTIMER42MUX() {
+void FSR16x16_BNL::readTIMER42MUX() {
     clockSignal(_rowClearPin, _rowClearType);
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
@@ -430,7 +430,7 @@ void FSR16x16_BNL::read() {
             if (_colType == DIRECT) {
                 readDIRECT2DIRECT();
             } else if (_colType == DE_MUX) {
-                readDIRECT2MUIX();
+                readDIRECT2MUX();
             } else if (_colType == TIMER4) {
                 readDIRECT2TIMER4();
             }
