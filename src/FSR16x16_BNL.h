@@ -9,11 +9,6 @@ enum pinSelectType {
     TIMER8
 };
 
-enum clockType {
-    RISING,
-    FALLING
-};
-
 enum delayType {
     NONE,
     MICRO,
@@ -34,30 +29,30 @@ class FSR16x16_BNL {
         FSR16x16_BNL(pinSelectType rowT, 
                     int* rowPins, 
                     pinSelectType colT, 
-                    int colClearPin, clockType colClearType, 
-                    int colClockPin, clockType colClockType, 
+                    int colClearPin, int colClearType, 
+                    int colClockPin, int colClockType, 
                     int outputPin);
         FSR16x16_BNL(pinSelectType rowT, 
-                    int rowClearPin, clockType rowClearType, 
-                    int rowClockPin, clockType rowClockType, 
+                    int rowClearPin, int rowClearType, 
+                    int rowClockPin, int rowClockType, 
                     pinSelectType colT, 
                     int* colPins);
         FSR16x16_BNL(pinSelectType rowT, 
-                    int rowClearPin, clockType rowClearType, 
-                    int rowClockPin, clockType rowClockType, 
+                    int rowClearPin, int rowClearType, 
+                    int rowClockPin, int rowClockType, 
                     pinSelectType colT, 
                     int* colPins, 
                     int outputPin);
         FSR16x16_BNL(pinSelectType rowT, 
-                    int rowClearPin, clockType rowClearType, 
-                    int rowClockPin, clockType rowClockType, 
+                    int rowClearPin, int rowClearType, 
+                    int rowClockPin, int rowClockType, 
                     pinSelectType colT, 
-                    int colClearPin, clockType colClearType, 
-                    int colClockPin, clockType colClockType, 
+                    int colClearPin, int colClearType, 
+                    int colClockPin, int colClockType, 
                     int outputPin);
         FSR16x16_BNL(pinSelectType rowT, 
-                    int clearPin, clockType clearType, 
-                    int clockPin, clockType clkType);
+                    int clearPin, int clearType, 
+                    int clockPin, int clkType);
     
         void begin();
         void read();
@@ -76,17 +71,17 @@ class FSR16x16_BNL {
         const int* _colPins;
 
         const int _rowClearPin;
-        const clockType _rowClearType;
+        const int _rowClearType;
         const int _rowClockPin;
-        const clockType _rowClockType;
+        const int _rowClockType;
         const int _colClearPin;
-        const clockType _colClearType;
+        const int _colClearType;
         const int _colClockPin;
-        const clockType _colClockType;
+        const int _colClockType;
         const int _clearPin;
-        const clockType _clearType;
+        const int _clearType;
         const int _clockPin;
-        const clockType _clockType;
+        const int _clockType;
 
         const int _outputPin = -1;
 
@@ -97,7 +92,7 @@ class FSR16x16_BNL {
 
         void constructorError();
 
-        void clockSignal(int pin, clockType clkType);
+        void clockSignal(int pin, int clkType);
 
         void beginRowDirect();
         void beginRowDemux();

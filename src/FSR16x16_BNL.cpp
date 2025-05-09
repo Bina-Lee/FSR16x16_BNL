@@ -54,8 +54,8 @@ FSR16x16_BNL::FSR16x16_BNL(PinSelectType rowT,
 FSR16x16_BNL::FSR16x16_BNL(PinSelectType rowT, 
                          int* rowPins, 
                          PinSelectType colT, 
-                         int colClearPin, clockType colClearType, 
-                         int colClockPin, clockType colClockType, 
+                         int colClearPin, int colClearType, 
+                         int colClockPin, int colClockType, 
                          int outputPin):
     _rowType(rowT),
     _rowPins(rowPins),
@@ -79,8 +79,8 @@ FSR16x16_BNL::FSR16x16_BNL(PinSelectType rowT,
 }
 
 FSR16x16_BNL::FSR16x16_BNL(PinSelectType rowT, 
-                         int rowClearPin, clockType rowClearType, 
-                         int rowClockPin, clockType rowClockType, 
+                         int rowClearPin, int rowClearType, 
+                         int rowClockPin, int rowClockType, 
                          PinSelectType colT, 
                          int* colPins):
     _rowType(rowT),
@@ -105,8 +105,8 @@ FSR16x16_BNL::FSR16x16_BNL(PinSelectType rowT,
 }
 
 FSR16x16_BNL::FSR16x16_BNL(PinSelectType rowT, 
-                         int rowClearPin, clockType rowClearType, 
-                         int rowClockPin, clockType rowClockType, 
+                         int rowClearPin, int rowClearType, 
+                         int rowClockPin, int rowClockType, 
                          PinSelectType colT, 
                          int* colPins, 
                          int outputPin):
@@ -132,11 +132,11 @@ FSR16x16_BNL::FSR16x16_BNL(PinSelectType rowT,
 }
 
 FSR16x16_BNL::FSR16x16_BNL(PinSelectType rowT, 
-                         int rowClearPin, clockType rowClearType, 
-                         int rowClockPin, clockType rowClockType, 
+                         int rowClearPin, int rowClearType, 
+                         int rowClockPin, int rowClockType, 
                          PinSelectType colT, 
-                         int colClearPin, clockType colClearType, 
-                         int colClockPin, clockType colClockType, 
+                         int colClearPin, int colClearType, 
+                         int colClockPin, int colClockType, 
                          int outputPin):
     _rowType(rowT),
     _rowClearPin(rowClearPin),
@@ -160,8 +160,8 @@ FSR16x16_BNL::FSR16x16_BNL(PinSelectType rowT,
 }
 
 FSR16x16_BNL::FSR16x16_BNL(PinSelectType rowT, 
-                         int clearPin, clockType clearType, 
-                         int clockPin, clockType clkType):
+                         int clearPin, int clearType, 
+                         int clockPin, int clkType):
     _rowType(rowT),
     _clearPin(clearPin),
     _clearType(clearType),
@@ -189,7 +189,7 @@ void FSR16x16_BNL::constructorError() {
     }
 }
 
-void FSR16x16_BNL::clockSignal(int pin, clockType clkType) {
+void FSR16x16_BNL::clockSignal(int pin, int clkType) {
     if (clkType == RISING) {
         if (_delayType == NONE){
             delayMicroseconds(1);
