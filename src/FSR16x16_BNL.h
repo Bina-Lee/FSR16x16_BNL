@@ -15,6 +15,13 @@ enum delayType {
     MILLI
 };
 
+enum mapType {
+    NORMAL,
+    REVERSE,
+    CROSS,
+    CROSS_REVERSE
+}
+
 class FSR16x16_BNL {
     public:
         FSR16x16_BNL(pinSelectType rowT, 
@@ -63,8 +70,8 @@ class FSR16x16_BNL {
 
         void setRowMap(int* _rowMap);
         void setColMap(int* _colMap);
-        void setRowMapInverse();
-        void setColMapInverse();
+        void setRowMap(mapType mapT);
+        void setColMap(mapType mapT);
 
     private:
         static const int SIZE = 16;
@@ -95,8 +102,8 @@ class FSR16x16_BNL {
         delayType _delayType = MILLI;
         int _delayTime = 20;
 
-        int rowMap[SIZE] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
-        int colMap[SIZE] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+        int _rowMap[SIZE] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+        int _colMap[SIZE] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
 
         void constructorError();
 
