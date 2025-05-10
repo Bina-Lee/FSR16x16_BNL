@@ -307,7 +307,7 @@ void FSR16x16_BNL::readDIRECT2DIRECT() {
     for (int i = 0; i < SIZE; i++) {
         digitalWrite(_rowPins[i], HIGH);
         for (int j = 0; j < SIZE; j++) {
-            data[i][j] = analogRead(_colPins[j]);;
+            data[rowMap[i]][colMap[j]] = analogRead(_colPins[j]);;
         }
         digitalWrite(_rowPins[i], LOW);
     }
@@ -320,7 +320,7 @@ void FSR16x16_BNL::readDIRECT2MUX() {
             for (int k = 0; k < SELECT_SIZE; k++) {
                 digitalWrite(_colPins[k], (j >> k) & 0x01);
             }
-            data[i][j] = analogRead(_outputPin);
+            data[rowMap[i]][colMap[j]] = analogRead(_outputPin);
         }
         digitalWrite(_rowPins[i], LOW);
     }
@@ -331,7 +331,7 @@ void FSR16x16_BNL::readDIRECT2TIMER4() {
         digitalWrite(_rowPins[i], HIGH);
         clockSignal(_colClearPin, _colClearType);
         for (int j = 0; j < SIZE; j++) {
-            data[i][j] = analogRead(_outputPin);
+            data[rowMap[i]][colMap[j]] = analogRead(_outputPin);
             clockSignal(_colClockPin, _colClockType);
         }
         digitalWrite(_rowPins[i], LOW);
@@ -344,7 +344,7 @@ void FSR16x16_BNL::readDEMUX2DIRECT() {
             digitalWrite(_rowPins[j], (i >> j) & 0x01);
         }
         for (int j = 0; j < SIZE; j++) {
-            data[i][j] = analogRead(_colPins[j]);
+            data[rowMap[i]][colMap[j]] = analogRead(_colPins[j]);
         }
     }
 }
@@ -358,7 +358,7 @@ void FSR16x16_BNL::readDEMUX2MUX() {
             for (int k = 0; k < SELECT_SIZE; k++) {
                 digitalWrite(_colPins[k], (j >> k) & 0x01);
             }
-            data[i][j] = analogRead(_outputPin);
+            data[rowMap[i]][colMap[j]] = analogRead(_outputPin);
         }
     }
 }
@@ -370,7 +370,7 @@ void FSR16x16_BNL::readDEMUX2TIMER4() {
         }
         clockSignal(_colClearPin, _colClearType);
         for (int j = 0; j < SIZE; j++) {
-            data[i][j] = analogRead(_outputPin);
+            data[rowMap[i]][colMap[j]] = analogRead(_outputPin);
             clockSignal(_colClockPin, _colClockType);
         }
     }
@@ -380,7 +380,7 @@ void FSR16x16_BNL::readTIMER42DIRECT() {
     clockSignal(_rowClearPin, _rowClearType);
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
-            data[i][j] = analogRead(_colPins[j]);
+            data[rowMap[i]][colMap[j]] = analogRead(_colPins[j]);
         }
         clockSignal(_rowClockPin, _rowClockType);
     }
@@ -393,7 +393,7 @@ void FSR16x16_BNL::readTIMER42MUX() {
             for (int k = 0; k < SELECT_SIZE; k++) {
                 digitalWrite(_colPins[k], (j >> k) & 0x01);
             }
-            data[i][j] = analogRead(_outputPin);
+            data[rowMap[i]][colMap[j]] = analogRead(_outputPin);
         }
         clockSignal(_rowClockPin, _rowClockType);
     }
@@ -404,7 +404,7 @@ void FSR16x16_BNL::readTIMER42TIMER4() {
     for (int i = 0; i < SIZE; i++) {
         clockSignal(_colClearPin, _colClearType);
         for (int j = 0; j < SIZE; j++) {
-            data[i][j] = analogRead(_outputPin);
+            data[rowMap[i]][colMap[j]] = analogRead(_outputPin);
             clockSignal(_colClockPin, _colClockType);
         }
         clockSignal(_rowClockPin, _rowClockType);
@@ -415,7 +415,7 @@ void FSR16x16_BNL::readTIMER8() {
     clockSignal(_clearPin, _clearType);
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
-            data[i][j] = analogRead(_outputPin);
+            data[rowMap[i]][colMap[j]] = analogRead(_outputPin);
             clockSignal(_clockPin, _clockType);
         }
     }
@@ -471,4 +471,16 @@ void FSR16x16_BNL::print() {
 void FSR16x16_BNL::clockDelay(delayType delayT, int delayTime) {
     _delayType = delayT;
     _delayTime = delayTime;
+}
+
+void FSR16x16_BNL::setRowMap(int* rowMap) {
+    for (int i = 0; i < SIZE; i++) {
+        _rowPins[i] = rowMap[i];
+    }
+}
+
+void FSR16x16_BNL::setColMap(int* colMap) {
+    for (int i = 0; i < SIZE; i++) {
+        _colPins[i] = colMap[i];
+    }
 }
