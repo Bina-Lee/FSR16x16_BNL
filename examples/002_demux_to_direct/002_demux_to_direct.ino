@@ -1,17 +1,18 @@
 #include <Arduino.h>
 #include <FSR16x16_BNL.h>
 
-// Define the pins
-const int CLEAR_PIN = 5;    // Digital pin for counter clear/reset
-const int CLOCK_PIN = 6;    // Digital pin for counter clock signal
-const int ANALOG_PIN = A0;  // Analog pin for multiplexer output
+// Define the row pins (DE_MUX connection)
+const int ROW_PINS[4] = {22, 23, 24, 25}; // 4 pins for demultiplexer selection
 
-// Initialize the sensor in TIMER8 mode (8-bit counter with clock/clear control)
-FSR16x16_BNL sensor(TIMER8, CLEAR_PIN, RISING, CLOCK_PIN, RISING);
+// Define the column pins (Direct connection)
+const int COL_PINS[16] = {A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15};
+
+// Initialize the sensor in DE_MUX-to-Direct mode
+FSR16x16_BNL sensor(DE_MUX, ROW_PINS, DIRECT, COL_PINS);
 
 void setup() {
     Serial.begin(115200);
-    Serial.println("FSR16x16_BNL Example Starting...");
+    Serial.println("FSR16x16_BNL DE_MUX-to-Direct Example Starting...");
 
     // Initialize sensor pins
     sensor.begin();
