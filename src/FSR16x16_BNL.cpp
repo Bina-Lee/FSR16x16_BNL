@@ -473,66 +473,66 @@ void FSR16x16_BNL::clockDelay(delayType delayT, int delayTime) {
     _delayTime = delayTime;
 }
 
-void FSR16x16_BNL::setRowMap(int* rowMap) {
+void FSR16x16_BNL::setRowIdxMap(int* rowIdxMap) {
     for (int i = 0; i < SIZE; i++) {
-        _rowMap[i] = rowMap[i];
+        _rowIdxMap[i] = rowIdxMap[i];
     }
 }
 
-void FSR16x16_BNL::setColMap(int* colMap) {
+void FSR16x16_BNL::setColIdxMap(int* colIdxMap) {
     for (int i = 0; i < SIZE; i++) {
-        _colMap[i] = colMap[i];
+        _colIdxMap[i] = colIdxMap[i];
     }
 }
 
-void FSR16x16_BNL::setRowMap(mapType mapT) {
+void FSR16x16_BNL::setRowIdxMap(mapIdxType mapT) {
     if (mapT == NORMAL) {
         for (int i = 0; i < SIZE; i++) {
-            _rowMap[i] = i;
+            _rowIdxMap[i] = i;
         }
     } else if (mapT == REVERSE) {
         for (int i = 0; i < SIZE; i++) {
-            _rowMap[i] = SIZE - 1 - i;
+            _rowIdxMap[i] = SIZE - 1 - i;
         }
     } else if (mapT == CROSS) {
         for (int i = 0; i < SIZE/2; i++) {
-            _rowMap[i] = i * 2;
+            _rowIdxMap[i] = i * 2;
         }
         for (int i = SIZE/2; i < SIZE; i++) {
-            _rowMap[i] = (SIZE - 1 - i) * 2 + 1;
+            _rowIdxMap[i] = (SIZE - 1 - i) * 2 + 1;
         }
     } else if (mapT == CROSS_REVERSE) {
         for (int i = 0; i < SIZE/2; i++) {
-            _rowMap[i] = i * 2 + 1;
+            _rowIdxMap[i] = i * 2 + 1;
         }
         for (int i = SIZE/2; i < SIZE; i++) {
-            _rowMap[i] = (SIZE - 1 - i) * 2;
+            _rowIdxMap[i] = (SIZE - 1 - i) * 2;
         }
     } 
 }
 
-void FSR16x16_BNL::setColMap(mapType mapT) {
+void FSR16x16_BNL::setColIdxMap(mapIdxType mapT) {
     if (mapT == NORMAL) {
         for (int i = 0; i < SIZE; i++) {
-            _colMap[i] = i;
+            _colIdxMap[i] = i;
         }
     } else if (mapT == REVERSE) {
         for (int i = 0; i < SIZE; i++) {
-            _colMap[i] = SIZE - 1 - i;
+            _colIdxMap[i] = SIZE - 1 - i;
         }
     } else if (mapT == CROSS) {
         for (int i = 0; i < SIZE/2; i++) {
-            _colMap[i] = i * 2;
+            _colIdxMap[i] = i * 2;
         }
         for (int i = SIZE/2; i < SIZE; i++) {
-            _colMap[i] = (SIZE - 1 - i) * 2 + 1;
+            _colIdxMap[i] = (SIZE - 1 - i) * 2 + 1;
         }
     } else if (mapT == CROSS_REVERSE) {
         for (int i = 0; i < SIZE/2; i++) {
-            _colMap[i] = i * 2 + 1;
+            _colIdxMap[i] = i * 2 + 1;
         }
         for (int i = SIZE/2; i < SIZE; i++) {
-            _colMap[i] = (SIZE - 1 - i) * 2;
+            _colIdxMap[i] = (SIZE - 1 - i) * 2;
         }
     } 
 }
