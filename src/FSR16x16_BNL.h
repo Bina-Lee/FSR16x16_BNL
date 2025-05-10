@@ -68,8 +68,8 @@ class FSR16x16_BNL {
 
         void clockDelay(delayType delayT, int delayTime);
 
-        void setRowIdxMap(int* _rowMap);
-        void setColIdxMap(int* _colMap);
+        void setRowIdxMap(int* rowIdxMap);
+        void setColIdxMap(int* colIdxMap);
         void setRowIdxMap(mapType mapT);
         void setColIdxMap(mapType mapT);
 
