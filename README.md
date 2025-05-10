@@ -258,4 +258,4 @@ void loop() {
 
 - **Make sure to wire the hardware exactly as described** in the provided design document for the 3-pin setup.
 - This library also supports more complex setups (DIRECT, DEMUX, TIMER4), but its main goal is to demonstrate the **minimum GPIO 3-pin configuration**.
-- For visualizing the data, you can forward the serial output to Python or Processing to create real-time pressure maps.=
+- For visualizing the data, you can forward the serial output to Python or Processing to create real-time pressure maps.
