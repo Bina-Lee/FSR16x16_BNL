@@ -235,7 +235,24 @@ void loop() {
 | `print()`                     | Prints the full 16x16 matrix to Serial.           |
 | `clockDelay(type, time)`      | Configures delay between clock pulses (if needed). |
 
----
+### `clockDelay(type, time)` Details
+- **Default Values**:
+    - `delayType`: `MILLI`
+    - `delayTime`: `20`
+
+- **Delay Types**:
+    - `NONE`: Adds a fixed delay of 1 microsecond.
+    - `MICRO`: Adds a delay in microseconds as specified by `time`.
+    - `MILLI`: Adds a delay in milliseconds as specified by `time`.
+
+- **Impact on `read()`**:
+    - The `read()` function scans all 256 points in the matrix.
+    - For circuits using `TIMER4` or `TIMER8` modes, the delay is applied twice for each clock signal.
+    - In `TIMER4` mode:
+        - If both rows and columns use `TIMER4`, a total of 289 clock signals are used (17 rows * 17 columns).
+        - Otherwise, 17 clock signals are used for rows (16 rows + 1 clear signal).
+    - In `TIMER8` mode, a total of 257 clock signals are used (256 points + 1 clear signal).
+    - The total time taken for a complete scan is approximately `(number of clock signals) * 2 * delayTime`, where `delayTime` is determined by the selected `delayType`.
 
 ## 💡 Notes
 
