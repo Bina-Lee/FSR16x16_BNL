@@ -475,12 +475,24 @@ void FSR16x16_BNL::clockDelay(delayType delayT, int delayTime) {
 
 void FSR16x16_BNL::setRowMap(int* rowMap) {
     for (int i = 0; i < SIZE; i++) {
-        _rowPins[i] = rowMap[i];
+        _rowMap[i] = rowMap[i];
     }
 }
 
 void FSR16x16_BNL::setColMap(int* colMap) {
     for (int i = 0; i < SIZE; i++) {
-        _colPins[i] = colMap[i];
+        _colMap[i] = colMap[i];
+    }
+}
+
+void FSR16x16_BNL::setRowMapReverse() {
+    for (int i = 0; i < SIZE; i++) {
+        rowMap[i] = SIZE - 1 - i;
+    }
+}
+
+void FSR16x16_BNL::setColMapReverse() {
+    for (int i = 0; i < SIZE; i++) {
+        colMap[i] = SIZE - 1 - i;
     }
 }

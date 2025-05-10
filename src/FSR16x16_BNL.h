@@ -63,6 +63,8 @@ class FSR16x16_BNL {
 
         void setRowMap(int* _rowMap);
         void setColMap(int* _colMap);
+        void setRowMapInverse();
+        void setColMapInverse();
 
     private:
         static const int SIZE = 16;
