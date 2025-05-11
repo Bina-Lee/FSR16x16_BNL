@@ -20,7 +20,7 @@ enum mapIdxType {
     REVERSE,
     CROSS,
     CROSS_REVERSE
-}
+};
 
 class FSR16x16_BNL {
     public:
