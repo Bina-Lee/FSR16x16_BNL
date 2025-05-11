@@ -70,8 +70,8 @@ class FSR16x16_BNL {
 
         void setRowIdxMap(int* rowIdxMap);
         void setColIdxMap(int* colIdxMap);
-        void setRowIdxMap(mapType mapT);
-        void setColIdxMap(mapType mapT);
+        void setRowIdxMap(mapIdxType mapT);
+        void setColIdxMap(mapIdxType mapT);
 
     private:
         static const int SIZE = 16;
